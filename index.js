@@ -22,11 +22,10 @@ async function run() {
     for (const artifact in artifacts) {
       try {
         await octokit.request(
-          "DELETE /repos/{owner}/{repo}/actions/artifacts/{artifact_id}",
+          `DELETE /repos/{owner}/{repo}/actions/artifacts/${artifact.id}`,
           {
-            owner: owner,
-            repo: repo,
-            artifact_id: artifact.id,
+            owner,
+            repo,
           }
         );
         console.log(`succesfuly deleted artifact id: ${artifact.id}`);
