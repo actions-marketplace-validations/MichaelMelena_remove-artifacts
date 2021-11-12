@@ -50509,14 +50509,15 @@ async function run() {
       return;
     }
 
-    for (const artifact in artifacts) {
+    for (const artifact of artifacts) {
       try {
         console.log(`current artifact: ${JSON.stringify(artifact)}`);
         await octokit.request(
-          `DELETE /repos/{owner}/{repo}/actions/artifacts/${artifact.id}`,
+          "DELETE /repos/{owner}/{repo}/actions/artifacts/{artifact_id}",
           {
-            owner,
-            repo,
+            owner: owner,
+            repo: repo,
+            artifact_id: artifact.id,
           }
         );
         console.log(`succesfuly deleted artifact id: ${artifact.id}`);
