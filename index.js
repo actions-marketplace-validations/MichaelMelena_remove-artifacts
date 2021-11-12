@@ -11,7 +11,6 @@ console.log(`repository: ${repo}`);
 const artifacts_string = core.getInput("artifacts");
 console.log(`artifact string: ${artifacts_string}`);
 
-// most @actions toolkit packages have async methods
 async function run() {
   try {
     const artifacts = sjson.parse(core.getInput("artifacts"), {
@@ -19,14 +18,20 @@ async function run() {
       constructorAction: "remove",
     });
     console.log(`artifacts: ${JSON.stringify(artifacts)}`);
-    if (!Array.isArray(artifacts) || artifacts.length == 0) {
+    if (!Array.isArray(artifacts)) {
       core.setFailed(`artifact contains empty or invalid value: ${artifacts} `);
       return;
+    }
+
+    if (artifacts.length == 0) {
+      console.log("There are no artifacts to delete!");
     }
 
     for (const artifact of artifacts) {
       try {
         console.log(`current artifact: ${JSON.stringify(artifact)}`);
+
+        // See https://docs.github.com/en/rest/reference/actions#delete-an-artifact
         await octokit.request(
           "DELETE /repos/{owner}/{repo}/actions/artifacts/{artifact_id}",
           {
