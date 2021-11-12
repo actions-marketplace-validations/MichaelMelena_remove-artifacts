@@ -24,7 +24,7 @@ async function run() {
     }
 
     if (artifacts.length == 0) {
-      console.log("There are no artifacts to delete!");
+      console.log("There are no artifacts to remove!");
     }
 
     for (const artifact of artifacts) {
@@ -40,7 +40,7 @@ async function run() {
             artifact_id: artifact.id,
           }
         );
-        console.log(`succesfuly deleted artifact id: ${artifact.id}`);
+        console.log(`succesfuly removed artifact id: ${artifact.id}`);
       } catch (e) {
         console.log(e);
       }
