@@ -1,4 +1,4 @@
-name: 'remove artifacts!'
+name: 'Artifact remover'
 author: 'Michael Melena'
 description: 'deletes all artifacts'
 branding:
