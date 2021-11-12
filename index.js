@@ -8,6 +8,8 @@ const [owner, repo] = core.getInput("repository").split("/");
 
 console.log(`owner: ${owner}`);
 console.log(`repository: ${repo}`);
+const artifacts_string = core.getInput("artifacts");
+console.log(`artifact string: ${artifacts_string}`)
 
 // most @actions toolkit packages have async methods
 async function run() {
