@@ -50507,11 +50507,11 @@ async function run() {
     for (const artifact in artifacts) {
       try {
         await octokit.request(
-          "DELETE /repos/{owner}/{repo}/actions/artifact/{id}",
+          "DELETE /repos/{owner}/{repo}/actions/artifacts/{artifact_id}",
           {
             owner: owner,
             repo: repo,
-            id: artifact.id,
+            artifact_id: artifact.id,
           }
         );
         console.log(`succesfuly deleted artifact id: ${artifact.id}`);
@@ -50525,6 +50525,7 @@ async function run() {
 }
 
 run();
+
 })();
 
 module.exports = __webpack_exports__;
