@@ -32,9 +32,9 @@ jobs:
     steps:
     - id: result 
       uses: MichaelMelena/list-artifacts@v1
-    - uses: MichaelMelena/delete-artifacts@1
+    - uses: MichaelMelena/delete-artifacts@v1
       with:
-        artifacts: ${{ fromJSON(steps.result.outputs.artifacts) }}
+        artifacts: ${{ steps.result.outputs.artifacts }}
 ```
 
 ## Advanced template
