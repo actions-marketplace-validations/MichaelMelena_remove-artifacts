@@ -50498,7 +50498,7 @@ console.log(`repository: ${repo}`);
 async function run() {
   try {
     const artifacts = sjson.parse(core.getInput("artifacts"));
-
+    console.log(`artifacts: ${artifacts}`)
     if (!Array.isArray(artifacts) || artifacts.length == 0) {
       core.setFailed(`artifact contains empty or invalid value: ${artifacts} `);
       return;
