@@ -1,20 +1,41 @@
-const core = require('@actions/core');
-const wait = require('./wait');
+const core = require("@actions/core");
+const sjson = require("secure-json-parse");
+const { Octokit } = require("@octokit/action");
 
+const octokit = new Octokit();
+
+const [owner, repo] = core.getInput("repository").split("/");
+
+console.log(`owner: ${owner}`);
+console.log(`repository: ${repo}`);
 
 // most @actions toolkit packages have async methods
 async function run() {
   try {
-    const ms = core.getInput('milliseconds');
-    core.info(`Waiting ${ms} milliseconds ...`);
+    const artifacts = sjson.parse(core.getInput("artifacts"));
 
-    core.debug((new Date()).toTimeString()); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
-    await wait(parseInt(ms));
-    core.info((new Date()).toTimeString());
+    if (!Array.isArray(artifacts) || artifacts.length == 0) {
+      core.setFailed(`artifact contains empty or invalid value: ${artifacts} `);
+      return;
+    }
 
-    core.setOutput('time', new Date().toTimeString());
+    for (const artifact in artifacts) {
+      try {
+        await octokit.request(
+          "DELETE /repos/{owner}/{repo}/actions/artifacts/{id}",
+          {
+            owner: owner,
+            repo: repo,
+            id: artifact.id,
+          }
+        );
+        console.log(`succesfuly deleted artifact id: ${artifact.id}`);
+      } catch (e) {
+        console.log(e);
+      }
+    }
   } catch (error) {
-    core.setFailed(error.message);
+    core.setFailed(error);
   }
 }
 

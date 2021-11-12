@@ -1,13 +1,17 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: 'delete artifacts'
+description: 'deletes all artifacts'
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
+  GITHUB_TOKEN:
+    description: "github access token for target repository"
+    required: false,
+    default: ${{ github.token }}
+  repository:
+    description: "repository signature in {owner}/{repo} format"
+    reqired: false
+    default: ${{ github.repository }}
+  artifacts:
+    description: "artifacts to be deleted"
     required: true
-    default: '1000'
-outputs:
-  time: # output will be available to future steps
-    description: 'The current time after waiting'
 runs:
   using: 'node12'
   main: 'dist/index.js'
