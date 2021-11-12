@@ -9,7 +9,7 @@ const [owner, repo] = core.getInput("repository").split("/");
 console.log(`owner: ${owner}`);
 console.log(`repository: ${repo}`);
 const artifacts_string = core.getInput("artifacts");
-console.log(`artifact string: ${artifacts_string}`)
+console.log(`artifact string: ${artifacts_string}`);
 
 // most @actions toolkit packages have async methods
 async function run() {
@@ -18,7 +18,7 @@ async function run() {
       protoAction: "remove",
       constructorAction: "remove",
     });
-    console.log(`artifacts: ${artifacts}`);
+    console.log(`artifacts: ${JSON.stringify(artifacts)}`);
     if (!Array.isArray(artifacts) || artifacts.length == 0) {
       core.setFailed(`artifact contains empty or invalid value: ${artifacts} `);
       return;
