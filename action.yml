@@ -1,5 +1,9 @@
 name: 'delete artifacts'
+author: 'Michael Melena'
 description: 'deletes all artifacts'
+branding:
+  icon: 'trash-2'
+  color: 'purple'
 inputs:
   GITHUB_TOKEN:
     description: "github access token for target repository"
