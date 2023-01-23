@@ -25,7 +25,7 @@
   "homepage": "https://github.com/MichaelMelena/delete-artifacts#readme",
   "dependencies": {
     "@actions/core": "^1.2.5",
-    "@octokit/action": "^3.18.0",
+    "@octokit/action": "^5.0.2",
     "secure-json-parse": "^2.4.0"
   },
   "devDependencies": {
